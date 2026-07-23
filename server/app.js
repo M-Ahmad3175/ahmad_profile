@@ -7,6 +7,9 @@ const morgan = require("morgan");
 
 const healthRoutes = require("./routes/healthRoutes");
 const authRoutes = require("./routes/authRoutes");
+const profileRoutes = require("./routes/profileRoutes");
+const projectRoutes = require("./routes/projectRoutes");
+const skillRoutes = require("./routes/skillRoutes");
 
 const app = express();
 
@@ -28,5 +31,17 @@ app.use(morgan("dev"));
 
 app.use("/api/v1", healthRoutes);
 app.use("/api/v1/auth", authRoutes);
+
+// Mount profile routes under the main API version prefix so all profile endpoints
+// follow the same /api/v1 structure as the rest of the backend.
+app.use("/api/v1", profileRoutes);
+
+// Mount project routes under the main API version prefix so all project endpoints
+// follow the same /api/v1 structure as the rest of the backend.
+app.use("/api/v1", projectRoutes);
+
+// Mount skill routes under the main API version prefix so all skill endpoints
+// follow the same /api/v1 structure as the rest of the backend.
+app.use("/api/v1", skillRoutes);
 
 module.exports = app;
