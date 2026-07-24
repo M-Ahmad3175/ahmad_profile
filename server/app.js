@@ -10,6 +10,7 @@ const authRoutes = require("./routes/authRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const skillRoutes = require("./routes/skillRoutes");
+const certificateRoutes = require("./routes/certificateRoutes");
 
 const app = express();
 
@@ -43,5 +44,9 @@ app.use("/api/v1", projectRoutes);
 // Mount skill routes under the main API version prefix so all skill endpoints
 // follow the same /api/v1 structure as the rest of the backend.
 app.use("/api/v1", skillRoutes);
+
+// Mount certificate routes under the main API version prefix so all certificate endpoints
+// are available under /api/v1.
+app.use("/api/v1", certificateRoutes);
 
 module.exports = app;
