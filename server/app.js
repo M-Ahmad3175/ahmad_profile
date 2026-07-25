@@ -13,6 +13,8 @@ const skillRoutes = require("./routes/skillRoutes");
 const certificateRoutes = require("./routes/certificateRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const experienceRoutes = require("./routes/experienceRoutes");
+const socialLinkRoutes = require("./routes/socialLinkRoutes");
+
 
 const app = express();
 
@@ -58,5 +60,9 @@ app.use("/api/v1", messageRoutes);
 // Mount experience routes under the main API version prefix so all experience endpoints
 // are available under /api/v1.
 app.use("/api/v1", experienceRoutes);
+
+// Mount social link routes under the main API version prefix so all social link endpoints
+// are available under /api/v1.
+app.use("/api/v1", socialLinkRoutes);
 
 module.exports = app;
