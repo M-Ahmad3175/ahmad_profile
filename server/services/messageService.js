@@ -1,4 +1,5 @@
 const Message = require("../models/messageModel");
+const { sendEmail } = require("./emailService");
 
 // Helper to clean the incoming message data before saving.
 function normalizeMessageData(payload) {
@@ -49,7 +50,19 @@ async function createMessage(payload) {
   try {
     const normalizedData = normalizeMessageData(payload);
     const message = new Message(normalizedData);
-    return await message.save();
+    const savedMessage = await message.save();
+
+    try {
+      await sendEmail({
+        to: process.env.EMAIL_USER,
+        subject: "New Portfolio Contact Message",
+        text: `Name: ${savedMessage.name}\nEmail: ${savedMessage.email}\nSubject: ${savedMessage.subject}\nMessage: ${savedMessage.message}`,
+      });
+    } catch (emailError) {
+      console.error("Failed to send message email:", emailError);
+    }
+
+    return savedMessage;
   } catch (error) {
     const err = new Error("Failed to create message");
     err.statusCode = 500;
