@@ -11,6 +11,7 @@ const profileRoutes = require("./routes/profileRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const skillRoutes = require("./routes/skillRoutes");
 const certificateRoutes = require("./routes/certificateRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 
 const app = express();
 
@@ -48,5 +49,9 @@ app.use("/api/v1", skillRoutes);
 // Mount certificate routes under the main API version prefix so all certificate endpoints
 // are available under /api/v1.
 app.use("/api/v1", certificateRoutes);
+
+// Mount message routes under the main API version prefix so all message endpoints
+// are available under /api/v1.
+app.use("/api/v1", messageRoutes);
 
 module.exports = app;
