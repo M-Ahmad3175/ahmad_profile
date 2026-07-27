@@ -5,6 +5,7 @@ const upload = require("../middleware/uploadMiddleware");
 
 const router = express.Router();
 
+
 // Protected route: upload a profile image.
 router.post(
   "/upload/profile",

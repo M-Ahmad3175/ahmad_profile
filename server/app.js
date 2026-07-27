@@ -19,6 +19,7 @@ const uploadRoutes = require("./routes/uploadRoutes");
 const educationRoutes = require("./routes/educationRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
 const settingsRoutes = require("./routes/settingsRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
@@ -86,6 +87,9 @@ app.use("/api/v1", resumeRoutes);
 // Mount settings routes under the main API version prefix so all settings endpoints
 // are available under /api/v1.
 app.use("/api/v1", settingsRoutes);
+// Mount dashboard routes under the main API version prefix so all dashboard endpoints
+// are available under /api/v1.
+app.use("/api/v1", dashboardRoutes);
 
 /* -------------------------------------------------------------------------- */
 /*                              Global Error Handler                          */

@@ -1,6 +1,7 @@
 
 const { uploadImage } = require("../services/cloudinaryService");
 
+
 // Upload a profile image to Cloudinary.
 async function uploadProfileImage(req, res, next) {
   try {

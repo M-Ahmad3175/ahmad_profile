@@ -10,5 +10,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Diagnostic log to ensure the expected env var is loaded.
+console.log('Cloudinary cloud_name env:', process.env.CLOUDINARY_CLOUD_NAME);
+console.log('Cloudinary URL env:', process.env.CLOUDINARY_URL);
+
 // Export the configured Cloudinary instance.
 module.exports = cloudinary;
