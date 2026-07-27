@@ -4,8 +4,7 @@ const cloudinary = require("../config/cloudinary");
 // Upload an image buffer to Cloudinary.
 async function uploadImage(fileBuffer, folder) {
   try {
-    // Diagnostic: log current Cloudinary config to trace incorrect cloud_name
-    try { console.log('cloudinary config at upload time:', cloudinary.config && cloudinary.config().cloud_name); } catch (e) { console.log('cloudinary config read error', e && e.message); }
+    // (diagnostic log removed)
     return new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
