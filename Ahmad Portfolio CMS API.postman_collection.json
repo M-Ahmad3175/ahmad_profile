@@ -1,0 +1,1204 @@
+{
+  "info": {
+    "_postman_id": "b4b008e7-067c-4a95-9858-14899571c3e5",
+    "name": "Ahmad Portfolio CMS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54145098"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Post Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"email\" :\"your-email@example.com\",\r\n   \"password\":\"********\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Complete backend API collection.\r\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Post Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get me",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📁 Profile",
+      "item": [
+        {
+          "name": "GET Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fullName\": \"Muhammad Ahmad\",\r\n  \"email\": \"your-email@example.com\",\r\n  \"professionalTitle\": \"Full Stack MERN Developer\",\r\n  \"bio\": \"Building modern web applications using the MERN Stack.\",\r\n  \"location\": \"Lahore, Pakistan\",\r\n  \"availableForWork\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Profile (Verify)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Skills",
+      "item": [
+        {
+          "name": "GET All Skills",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/skills",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "skills"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Skill",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"React.js\",\r\n  \"category\": \"Frontend\",\r\n  \"proficiency\": 90,\r\n  \"displayOrder\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/skills",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "skills"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Skills (Verify)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"React.js\",\r\n  \"category\": \"Frontend\",\r\n  \"proficiency\": 90,\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/skills",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "skills"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "GET All Projects",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"React.js\",\r\n  \"category\": \"Frontend\",\r\n  \"proficiency\": 90,\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Project",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Portfolio CMS\",\r\n  \"shortDescription\": \"A full-stack portfolio management system.\",\r\n  \"fullDescription\": \"This project allows an admin to manage portfolio content including projects, skills, certificates, experience, resume, and profile information.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"React\",\r\n    \"Cloudinary\"\r\n  ],\r\n  \"githubUrl\": \"https://github.com/M-Ahmad3175/Portfolio-CMS\",\r\n  \"liveUrl\": \"https://portfolio.example.com\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1,\r\n  \"status\": \"ongoing\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Projects (Verify)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Portfolio CMS\",\r\n  \"shortDescription\": \"A full-stack portfolio management system.\",\r\n  \"fullDescription\": \"This project allows an admin to manage portfolio content including projects, skills, certificates, experience, resume, and profile information.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"React\",\r\n    \"Cloudinary\"\r\n  ],\r\n  \"githubUrl\": \"https://github.com/M-Ahmad3175/Portfolio-CMS\",\r\n  \"liveUrl\": \"https://portfolio.example.com\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1,\r\n  \"status\": \"ongoing\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Project",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Portfolio CMS\",\r\n  \"shortDescription\": \"Professional MERN portfolio management system.\",\r\n  \"fullDescription\": \"Updated description for testing the update endpoint.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"React\",\r\n    \"Cloudinary\"\r\n  ],\r\n  \"githubUrl\": \"https://github.com/M-Ahmad3175/Portfolio-CMS\",\r\n  \"liveUrl\": \"https://portfolio.example.com\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1,\r\n  \"status\": \"completed\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects/6a683bddd5903ec7944f88f0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects",
+                "6a683bddd5903ec7944f88f0"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Project",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Portfolio CMS\",\r\n  \"shortDescription\": \"Professional MERN portfolio management system.\",\r\n  \"fullDescription\": \"Updated description for testing the update endpoint.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"React\",\r\n    \"Cloudinary\"\r\n  ],\r\n  \"githubUrl\": \"https://github.com/M-Ahmad3175/Portfolio-CMS\",\r\n  \"liveUrl\": \"https://portfolio.example.com\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1,\r\n  \"status\": \"completed\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/projects/6a683bddd5903ec7944f88f0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "projects",
+                "6a683bddd5903ec7944f88f0"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Experience",
+      "item": [
+        {
+          "name": "GET All Experiences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/experiences",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "experiences"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Experience",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"jobTitle\": \"Software Engineering Intern\",\r\n  \"company\": \"TDCP Lahore\",\r\n  \"employmentType\": \"Internship\",\r\n  \"location\": \"Lahore, Pakistan\",\r\n  \"startDate\": \"2026-03-01\",\r\n  \"currentlyWorking\": true,\r\n  \"description\": \"Worked on backend development using Node.js, Express.js, MongoDB and REST APIs.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"Git\"\r\n  ],\r\n  \"displayOrder\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/experiences",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "experiences"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Experiences (Verify)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"jobTitle\": \"Software Engineering Intern\",\r\n  \"company\": \"TDCP Lahore\",\r\n  \"employmentType\": \"Internship\",\r\n  \"location\": \"Lahore, Pakistan\",\r\n  \"startDate\": \"2026-03-01\",\r\n  \"currentlyWorking\": true,\r\n  \"description\": \"Worked on backend development using Node.js, Express.js, MongoDB and REST APIs.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"Git\"\r\n  ],\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/experiences",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "experiences"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Experience by id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"jobTitle\": \"Software Engineering Intern\",\r\n  \"company\": \"TDCP Lahore\",\r\n  \"employmentType\": \"Internship\",\r\n  \"location\": \"Lahore, Pakistan\",\r\n  \"startDate\": \"2026-03-01\",\r\n  \"currentlyWorking\": true,\r\n  \"description\": \"Worked on backend development using Node.js, Express.js, MongoDB and REST APIs.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"Git\"\r\n  ],\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/experiences/6a68431fd5903ec7944f88f2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "experiences",
+                "6a68431fd5903ec7944f88f2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Experience",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"jobTitle\": \"Software Engineer Intern\",\r\n  \"company\": \"TDCP Lahore\",\r\n  \"employmentType\": \"Internship\",\r\n  \"location\": \"Lahore, Pakistan\",\r\n  \"startDate\": \"2026-03-01\",\r\n  \"endDate\": \"2026-06-30\",\r\n  \"currentlyWorking\": false,\r\n  \"description\": \"Completed backend development tasks using Node.js, Express.js, MongoDB and Cloudinary.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"Cloudinary\"\r\n  ],\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/experiences/6a68431fd5903ec7944f88f2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "experiences",
+                "6a68431fd5903ec7944f88f2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Experience",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"jobTitle\": \"Software Engineer Intern\",\r\n  \"company\": \"TDCP Lahore\",\r\n  \"employmentType\": \"Internship\",\r\n  \"location\": \"Lahore, Pakistan\",\r\n  \"startDate\": \"2026-03-01\",\r\n  \"endDate\": \"2026-06-30\",\r\n  \"currentlyWorking\": false,\r\n  \"description\": \"Completed backend development tasks using Node.js, Express.js, MongoDB and Cloudinary.\",\r\n  \"technologies\": [\r\n    \"Node.js\",\r\n    \"Express.js\",\r\n    \"MongoDB\",\r\n    \"Cloudinary\"\r\n  ],\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/experiences/6a68431fd5903ec7944f88f2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "experiences",
+                "6a68431fd5903ec7944f88f2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Education",
+      "item": [
+        {
+          "name": "GET All Education",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/education",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "education"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Education",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"degree\": \"Bachelor of Science\",\r\n  \"institution\": \"University of Management and Technology\",\r\n  \"fieldOfStudy\": \"Software Engineering\",\r\n  \"startDate\": \"2025-09-01\",\r\n  \"currentlyStudying\": true,\r\n  \"grade\": \"CGPA 3.51\",\r\n  \"description\": \"Currently pursuing BS Software Engineering.\",\r\n  \"displayOrder\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/education",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "education"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Education (Verify)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"degree\": \"Bachelor of Science\",\r\n  \"institution\": \"University of Management and Technology\",\r\n  \"fieldOfStudy\": \"Software Engineering\",\r\n  \"startDate\": \"2025-09-01\",\r\n  \"currentlyStudying\": true,\r\n  \"grade\": \"CGPA 3.51\",\r\n  \"description\": \"Currently pursuing BS Software Engineering.\",\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/education/6a6861aed5903ec7944f88f3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "education",
+                "6a6861aed5903ec7944f88f3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Education By ID",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Update Education",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"degree\": \"Bachelor of Science\",\r\n  \"institution\": \"University of Management and Technology\",\r\n  \"fieldOfStudy\": \"Software Engineering\",\r\n  \"startDate\": \"2025-09-01\",\r\n  \"endDate\": \"2029-06-30\",\r\n  \"currentlyStudying\": false,\r\n  \"grade\": \"CGPA 3.60\",\r\n  \"description\": \"Completed BS Software Engineering successfully.\",\r\n  \"displayOrder\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/education/6a6861aed5903ec7944f88f3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "education",
+                "6a6861aed5903ec7944f88f3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Education",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"degree\": \"Bachelor of Science\",\r\n  \"institution\": \"University of Management and Technology\",\r\n  \"fieldOfStudy\": \"Software Engineering\",\r\n  \"startDate\": \"2025-09-01\",\r\n  \"endDate\": \"2029-06-30\",\r\n  \"currentlyStudying\": false,\r\n  \"grade\": \"CGPA 3.60\",\r\n  \"description\": \"Completed BS Software Engineering successfully.\",\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/education/6a6861aed5903ec7944f88f3",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "education",
+                "6a6861aed5903ec7944f88f3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Certificates",
+      "item": [
+        {
+          "name": "GET All Certificates",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"degree\": \"Bachelor of Science\",\r\n  \"institution\": \"University of Management and Technology\",\r\n  \"fieldOfStudy\": \"Software Engineering\",\r\n  \"startDate\": \"2025-09-01\",\r\n  \"currentlyStudying\": true,\r\n  \"grade\": \"CGPA 3.51\",\r\n  \"description\": \"Currently pursuing BS Software Engineering.\",\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/Certificates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Certificates"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create Certificate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"React Developer Certificate\",\r\n  \"issuingOrganization\": \"Meta\",\r\n  \"issueDate\": \"2026-07-20\",\r\n  \"credentialId\": \"META-2026-001\",\r\n  \"credentialUrl\": \"https://coursera.org/verify/META-2026-001\",\r\n  \"certificateImage\": \"https://res.cloudinary.com/dkc29ml8/image/upload/sample.png\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/Certificates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Certificates"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Certificates (Verify)",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "GET Certificate By ID",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"React Developer Certificate\",\r\n  \"issuingOrganization\": \"Meta\",\r\n  \"issueDate\": \"2026-07-20\",\r\n  \"credentialId\": \"META-2026-001\",\r\n  \"credentialUrl\": \"https://coursera.org/verify/META-2026-001\",\r\n  \"certificateImage\": \"https://res.cloudinary.com/dkc29ml8/image/upload/sample.png\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/Certificates/6a68d320d5903ec7944f88f4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Certificates",
+                "6a68d320d5903ec7944f88f4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Certificate",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"React Developer Certificate\",\r\n  \"issuingOrganization\": \"Meta\",\r\n  \"issueDate\": \"2026-07-20\",\r\n  \"credentialId\": \"META-2026-001\",\r\n  \"credentialUrl\": \"https://coursera.org/verify/META-2026-001\",\r\n  \"certificateImage\": \"https://res.cloudinary.com/dkc29ml8/image/upload/sample.png\",\r\n  \"featured\": true,\r\n  \"displayOrder\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/Certificates/6a68d320d5903ec7944f88f4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Certificates",
+                "6a68d320d5903ec7944f88f4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Resume",
+      "item": [
+        {
+          "name": "POST Create Resume",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"resumeUrl\": \"https://res.cloudinary.com/dkc29ml8/raw/upload/v1785124843/resume/resume.pdf\",\r\n  \"publicId\": \"resume/resume\",\r\n  \"fileName\": \"Muhammad_Ahmad_Resume.pdf\",\r\n  \"fileSize\": 245760,\r\n  \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resume",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Resumes (Verify)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"resumeUrl\": \"https://res.cloudinary.com/dkc29ml8/raw/upload/v1785124843/resume/resume.pdf\",\r\n  \"publicId\": \"resume/resume\",\r\n  \"fileName\": \"Muhammad_Ahmad_Resume.pdf\",\r\n  \"fileSize\": 245760,\r\n  \"isActive\": true\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resume",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Resume",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"resumeUrl\": \"https://example.com/Muhammad_Ahmad_Updated_Resume.pdf\",\r\n  \"publicId\": \"resume/resume-updated\",\r\n  \"fileName\": \"Muhammad_Ahmad_Updated_Resume.pdf\",\r\n  \"fileSize\": 256000,\r\n  \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resume/6a68d6f6d5903ec7944f88f5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume",
+                "6a68d6f6d5903ec7944f88f5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Resume",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"resumeUrl\": \"https://example.com/Muhammad_Ahmad_Updated_Resume.pdf\",\r\n  \"publicId\": \"resume/resume-updated\",\r\n  \"fileName\": \"Muhammad_Ahmad_Updated_Resume.pdf\",\r\n  \"fileSize\": 256000,\r\n  \"isActive\": true\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/resume/6a68d6f6d5903ec7944f88f5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume",
+                "6a68d6f6d5903ec7944f88f5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Resumes Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/resume",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "resume"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Social Links",
+      "item": [
+        {
+          "name": "GET Social Links",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/social-links",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "social-links"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Social Links",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "GET Social Links (Verify)",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "POST Send Message",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Muhammad Ahmad\",\r\n  \"email\": \"your-email@example.com\",\r\n  \"subject\": \"Portfolio Inquiry\",\r\n  \"message\": \"Hello! I visited your portfolio and wanted to discuss an internship opportunity.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET All Messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Message By ID",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Mark Message Read",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/messages/6a68eb4ed5903ec7944f88f6/read",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages",
+                "6a68eb4ed5903ec7944f88f6",
+                "read"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Message",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/messages/6a68eb4ed5903ec7944f88f6",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages",
+                "6a68eb4ed5903ec7944f88f6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "item": [
+        {
+          "name": "GET Settings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Update Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"websiteTitle\": \"Muhammad Ahmad Portfolio\",\r\n  \"websiteDescription\": \"Full Stack MERN Developer Portfolio\",\r\n  \"seoKeywords\": [\r\n    \"MERN\",\r\n    \"Node.js\",\r\n    \"React\",\r\n    \"MongoDB\",\r\n    \"Express\"\r\n  ],\r\n  \"logoUrl\": \"https://example.com/logo.png\",\r\n  \"faviconUrl\": \"https://example.com/favicon.ico\",\r\n  \"primaryColor\": \"#2563EB\",\r\n  \"resumeUrl\": \"https://example.com/resume.pdf\",\r\n  \"footerText\": \"© 2026 Muhammad Ahmad. All Rights Reserved.\",\r\n  \"contactEmail\": \"your-email@example.com\",\r\n  \"contactPhone\": \"+92-300-1234567\",\r\n  \"address\": \"Lahore, Pakistan\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Settings (Verify)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "GET Dashboard Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/dashboard",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

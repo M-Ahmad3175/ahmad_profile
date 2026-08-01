@@ -5,7 +5,6 @@ const { uploadImage } = require("../services/cloudinaryService");
 // Upload a profile image to Cloudinary.
 async function uploadProfileImage(req, res, next) {
   try {
-    console.log("Uploaded File:", req.file);
     // Check if an image was uploaded.
     if (!req.file) {
       const error = new Error("Please upload an image");

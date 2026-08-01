@@ -10,11 +10,8 @@ require('dotenv').config();
       body: JSON.stringify({email: process.env.ADMIN_EMAIL, password: process.env.ADMIN_PASSWORD})
     });
 
-    console.log('Login status', loginRes.status);
     const setCookie = loginRes.headers.get('set-cookie') || loginRes.headers.get('Set-Cookie');
-    console.log('Set-Cookie header:', setCookie);
     const json = await loginRes.json().catch(()=>null);
-    console.log('Login body:', json);
 
     const b64='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=';
     const buf=Buffer.from(b64,'base64');
@@ -31,9 +28,7 @@ require('dotenv').config();
       headers: headers,
       body: form
     });
-    console.log('Upload status', uploadRes.status);
     const text = await uploadRes.text();
-    console.log('Upload response body:', text);
   }catch(e){
     console.error('Test error', e);
   }

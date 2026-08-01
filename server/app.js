@@ -31,7 +31,12 @@ const app = express();
 app.use(helmet());
 
 // Enable Cross-Origin Resource Sharing.
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 // Compress all HTTP responses.
 app.use(compression());

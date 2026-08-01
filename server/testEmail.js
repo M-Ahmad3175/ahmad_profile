@@ -10,8 +10,6 @@ async function testEmail() {
       subject: "Portfolio CMS Email Test",
       text: "Congratulations! Nodemailer is working successfully.",
     });
-
-    console.log("Email sent successfully");
   } catch (error) {
     console.error("Email sending failed:", error);
   }

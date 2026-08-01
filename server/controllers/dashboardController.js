@@ -12,6 +12,7 @@ async function getDashboardStatistics(req, res, next) {
       },
     });
   } catch (error) {
+    console.error("Dashboard Controller Error:", error);
     next(error);
   }
 }

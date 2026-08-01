@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-const mongoose = require("mongoose");
 const connectDB = require("../config/db");
 const Admin = require("../models/Admin");
 
@@ -13,7 +12,6 @@ const seedAdmin = async () => {
     });
 
     if (existingAdmin) {
-      console.log("✅ Admin already exists.");
       process.exit(0);
     }
 
@@ -22,7 +20,6 @@ const seedAdmin = async () => {
       password: process.env.ADMIN_PASSWORD,
     });
 
-    console.log("🎉 Admin created successfully.");
     process.exit(0);
   } catch (error) {
     console.error("❌ Failed to seed admin.");
