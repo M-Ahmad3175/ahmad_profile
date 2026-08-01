@@ -2,8 +2,8 @@ import Button from "../common/Button";
 import Card from "../common/Card";
 import Input from "../common/Input";
 import TextArea from "../common/TextArea";
-import Select from "../common/Select";
-import Checkbox from "../common/Checkbox";
+import Select from "../common/select";
+import Checkbox from "../common/checkbox";
 import FileInput from "../common/FileInput";
 
 function CrudForm({
