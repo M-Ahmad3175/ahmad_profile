@@ -39,7 +39,7 @@ app.use(helmet());
 // Enable Cross-Origin Resource Sharing.
 app.use(
   cors({
-    origin: process.env.https://ahmad-portfolio-cms.vercel.app,
+    origin: process.env.CLIENT_URL || "https://ahmad-portfolio-cms.vercel.app",
     credentials: true,
   })
 );
