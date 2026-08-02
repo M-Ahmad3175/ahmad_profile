@@ -51,6 +51,33 @@ app.use(
     credentials: true,
   })
 );
+// Ensure CORS headers are present for preflight and actual requests.
+// This adds explicit headers and responds to OPTIONS early so Vercel-hosted
+// frontend receives the required Access-Control-Allow-* headers.
+app.options("*", cors({ origin: allowedOrigins, credentials: true }));
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (!origin) return next();
+
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+    );
+  }
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 // Compress all HTTP responses.
 app.use(compression());
 
