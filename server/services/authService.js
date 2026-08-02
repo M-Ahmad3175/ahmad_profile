@@ -6,7 +6,8 @@ const getCookieOptions = () => ({
   httpOnly: true,
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   secure: process.env.NODE_ENV === "production",
-  maxAge: 60 * 60 * 1000,
+  path: "/",
+  maxAge: Number(process.env.COOKIE_MAX_AGE) || 60 * 60 * 1000,
 });
 
 const createToken = (admin) => {
@@ -17,7 +18,7 @@ const createToken = (admin) => {
     },
     process.env.JWT_SECRET || "dev-secret",
     {
-      expiresIn: "1h",
+      expiresIn: process.env.JWT_EXPIRES_IN || "1h",
     }
   );
 };

@@ -40,6 +40,7 @@ function App() {
               </ProtectedRoute>
             }
           >
+            <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
             <Route path="skills" element={<Skills />} />

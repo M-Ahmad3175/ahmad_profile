@@ -22,6 +22,7 @@ const settingsRoutes = require("./routes/settingsRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
+app.set("trust proxy", 1);
 
 const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-portfolio-cms.vercel.app";
 const allowedOrigins = [
@@ -110,6 +111,13 @@ app.use("/api/v1", dashboardRoutes);
 /* -------------------------------------------------------------------------- */
 /*                              Global Error Handler                          */
 /* -------------------------------------------------------------------------- */
+
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
 
 app.use((err, req, res, next) => {
   // Handle Multer file upload errors.
