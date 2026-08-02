@@ -24,6 +24,34 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 app.set("trust proxy", 1);
 
+// Early CORS header middleware: set headers before other middleware so
+// even errors and preflight responses contain Access-Control-Allow-* headers.
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  const safeOrigins = [
+    process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-profile.vercel.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+  ].filter(Boolean);
+
+  if (origin && safeOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+    );
+  }
+
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+
+  next();
+});
+
 const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-profile.vercel.app";
 const allowedOrigins = [
   FRONTEND_URL,
