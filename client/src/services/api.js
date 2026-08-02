@@ -1,14 +1,11 @@
-// Central Axios configuration for the entire application.
-// Every API request will use this instance.
-
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1",
+console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
 
-  // IMPORTANT:
-  // Our backend stores JWT inside an HttpOnly cookie.
-  // This allows the browser to automatically send the cookie.
+const api = axios.create({
+  baseURL:
+    import.meta.env.VITE_API_BASE_URL ||
+    "https://ahmad-portfolio-cms.onrender.com/api/v1",
   withCredentials: true,
 });
 
