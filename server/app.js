@@ -82,7 +82,7 @@ app.use(
 // Ensure CORS headers are present for preflight and actual requests.
 // This adds explicit headers and responds to OPTIONS early so Vercel-hosted
 // frontend receives the required Access-Control-Allow-* headers.
-app.options("*", cors({ origin: allowedOrigins, credentials: true }));
+app.options("/*", cors({ origin: allowedOrigins, credentials: true }));
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (!origin) return next();
