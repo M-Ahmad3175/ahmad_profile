@@ -23,8 +23,9 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const app = express();
 
+const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-portfolio-cms.vercel.app";
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
+  FRONTEND_URL,
   "http://localhost:5173",
   "http://127.0.0.1:5173",
 ].filter(Boolean);
@@ -37,10 +38,14 @@ const allowedOrigins = [
 app.use(helmet());
 
 // Enable Cross-Origin Resource Sharing.
-// Enable Cross-Origin Resource Sharing.
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "https://ahmad-portfolio-cms.vercel.app",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, origin || true);
+      }
+      return callback(new Error("CORS policy: origin not allowed"), false);
+    },
     credentials: true,
   })
 );
