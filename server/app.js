@@ -24,9 +24,10 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 app.set("trust proxy", 1);
 
-const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-portfolio-cms.vercel.app";
+const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-profile.vercel.app";
 const allowedOrigins = [
   FRONTEND_URL,
+  "https://ahmad-profile.vercel.app",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
 ].filter(Boolean);
