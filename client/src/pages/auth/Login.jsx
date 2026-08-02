@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { login } from "../../services/authService";
+import api from "../../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ function Login() {
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
+
+      // Verify the session was actually established by calling /auth/me
+      await api.get("/auth/me");
 
       toast.success(response.message || "Login Successful");
 
