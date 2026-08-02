@@ -39,16 +39,11 @@ app.use(helmet());
 // Enable Cross-Origin Resource Sharing.
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
+
 
 // Compress all HTTP responses.
 app.use(compression());
