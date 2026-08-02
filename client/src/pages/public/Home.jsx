@@ -68,16 +68,16 @@ function Home() {
           socialService.getAll(),
         ]);
 
-      setProfile(profileRes?.data?.profile || null);
-      setSkills(Array.isArray(skillsRes?.data?.skills) ? skillsRes.data.skills : []);
-      setProjects(Array.isArray(projectsRes?.data?.projects) ? projectsRes.data.projects : []);
-      setExperiences(Array.isArray(experienceRes?.data?.experiences) ? experienceRes.data.experiences : []);
-      setEducation(Array.isArray(educationRes?.data?.education) ? educationRes.data.education : []);
-      setCertificates(Array.isArray(certificatesRes?.data?.certificates) ? certificatesRes.data.certificates : []);
-      const resumeItems = Array.isArray(resumeRes?.data?.resumes) ? resumeRes.data.resumes : [];
+      setProfile(profileRes?.profile || null);
+      setSkills(Array.isArray(skillsRes?.skills) ? skillsRes.skills : []);
+      setProjects(Array.isArray(projectsRes?.projects) ? projectsRes.projects : []);
+      setExperiences(Array.isArray(experienceRes?.experiences) ? experienceRes.experiences : []);
+      setEducation(Array.isArray(educationRes?.education) ? educationRes.education : []);
+      setCertificates(Array.isArray(certificatesRes?.certificates) ? certificatesRes.certificates : []);
+      const resumeItems = Array.isArray(resumeRes?.resumes) ? resumeRes.resumes : [];
       setResume(resumeItems.find((item) => item.isActive) || resumeItems[0] || null);
-      setSettings(settingsRes?.data?.settings || null);
-      setSocialLinks(normalizeSocialLinks(socialLinksRes?.data?.socialLinks));
+      setSettings(settingsRes?.settings || null);
+      setSocialLinks(normalizeSocialLinks(socialLinksRes?.socialLinks));
     } catch (error) {
       console.error(error);
       setError("Some portfolio data could not be loaded. Showing available content only.");
