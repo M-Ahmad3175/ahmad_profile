@@ -37,30 +37,13 @@ const allowedOrigins = [
 app.use(helmet());
 
 // Enable Cross-Origin Resource Sharing.
-const allowedOrigins = [
-  'https://ahmad-portfolio-cms.vercel.app',
-  
-  'http://localhost:5173', // If using Vite
-  process.env.CLIENT_URL,  // Your Render environment variable (optional)
-].filter(Boolean); // Removes any undefined/null values
-    
+// Enable Cross-Origin Resource Sharing.
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman, mobile apps, or server-to-server)
-      if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        // This will log the blocked origin to your Render logs for debugging
-        console.error('❌ Blocked CORS request from:', origin);
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: process.env.CLIENT_URL || "https://ahmad-portfolio-cms.vercel.app",
     credentials: true,
   })
-  );
+);
 // Compress all HTTP responses.
 app.use(compression());
 
