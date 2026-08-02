@@ -24,17 +24,26 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 app.set("trust proxy", 1);
 
+const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-profile.vercel.app";
+const allowedOrigins = [
+  FRONTEND_URL,
+  "https://ahmad-profile.vercel.app",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+].filter(Boolean);
+const vercelOriginPattern = /^https:\/\/[a-z0-9-]+\.vercel\.app$/;
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+  return allowedOrigins.includes(origin) || vercelOriginPattern.test(origin);
+};
+
 // Early CORS header middleware: set headers before other middleware so
 // even errors and preflight responses contain Access-Control-Allow-* headers.
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const safeOrigins = [
-    process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-profile.vercel.app",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-  ].filter(Boolean);
 
-  if (origin && safeOrigins.includes(origin)) {
+  if (origin && isAllowedOrigin(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader(
@@ -52,14 +61,6 @@ app.use((req, res, next) => {
   next();
 });
 
-const FRONTEND_URL = process.env.FRONTEND_URL || process.env.CLIENT_URL || "https://ahmad-profile.vercel.app";
-const allowedOrigins = [
-  FRONTEND_URL,
-  "https://ahmad-profile.vercel.app",
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-].filter(Boolean);
-
 /* -------------------------------------------------------------------------- */
 /*                                 Middlewares                                */
 /* -------------------------------------------------------------------------- */
@@ -71,7 +72,7 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (isAllowedOrigin(origin)) {
         return callback(null, origin || true);
       }
       return callback(new Error("CORS policy: origin not allowed"), false);
@@ -87,7 +88,7 @@ app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (!origin) return next();
 
-  if (allowedOrigins.includes(origin)) {
+  if (isAllowedOrigin(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
