@@ -59,13 +59,7 @@ app.use((req, res, next) => {
   if (req.method === "OPTIONS") return res.sendStatus(204);
 
   next();
-});
-
-/* -------------------------------------------------------------------------- */
-/*                                 Middlewares                                */
-/* -------------------------------------------------------------------------- */
-
-// Secure HTTP headers.
+})/ Secure HTTP headers.
 app.use(helmet());
 
 // Enable Cross-Origin Resource Sharing.
