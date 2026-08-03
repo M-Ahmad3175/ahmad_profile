@@ -52,14 +52,26 @@ async function createMessage(payload) {
     const message = new Message(normalizedData);
     const savedMessage = await message.save();
 
-    try {
-      await sendEmail({
-        to: process.env.EMAIL_USER,
-        subject: "New Portfolio Contact Message",
-        text: `Name: ${savedMessage.name}\nEmail: ${savedMessage.email}\nSubject: ${savedMessage.subject}\nMessage: ${savedMessage.message}`,
-      });
-    } catch (emailError) {
-      console.error("Failed to send message email:", emailError);
+    const adminEmail = process.env.EMAIL_TO || process.env.EMAIL_USER;
+
+    if (adminEmail) {
+      try {
+        await sendEmail({
+          to: adminEmail,
+          subject: "New Portfolio Contact Message",
+          html: `
+            <h3>New portfolio contact message</h3>
+            <p><strong>Name:</strong> ${savedMessage.name}</p>
+            <p><strong>Email:</strong> ${savedMessage.email}</p>
+            <p><strong>Subject:</strong> ${savedMessage.subject}</p>
+            <p><strong>Date:</strong> ${new Date(savedMessage.createdAt).toLocaleString()}</p>
+            <p><strong>Message:</strong><br />${savedMessage.message}</p>
+          `,
+          text: `Name: ${savedMessage.name}\nEmail: ${savedMessage.email}\nSubject: ${savedMessage.subject}\nDate: ${new Date(savedMessage.createdAt).toLocaleString()}\nMessage: ${savedMessage.message}`,
+        });
+      } catch (emailError) {
+        console.error("Failed to send message email:", emailError);
+      }
     }
 
     return savedMessage;
@@ -76,6 +88,33 @@ async function markMessageAsRead(messageId) {
     const message = await Message.findByIdAndUpdate(
       messageId,
       { isRead: true },
+      { new: true, runValidators: true }
+    );
+
+    if (!message) {
+      const error = new Error("Message not found");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    return message;
+  } catch (error) {
+    if (error.statusCode) {
+      throw error;
+    }
+
+    const err = new Error("Failed to update message");
+    err.statusCode = 500;
+    throw err;
+  }
+}
+
+// Mark a message as unread.
+async function markMessageAsUnread(messageId) {
+  try {
+    const message = await Message.findByIdAndUpdate(
+      messageId,
+      { isRead: false },
       { new: true, runValidators: true }
     );
 
@@ -129,5 +168,6 @@ module.exports = {
   getMessageById,
   createMessage,
   markMessageAsRead,
+  markMessageAsUnread,
   deleteMessage,
 };

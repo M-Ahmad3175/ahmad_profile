@@ -37,14 +37,14 @@ function Home() {
 
   const normalizeSocialLinks = (value) => {
     if (Array.isArray(value)) {
-      return value.find((item) => item && typeof item === "object") || null;
+      return value;
     }
 
     if (value && typeof value === "object") {
       return value;
     }
 
-    return null;
+    return [];
   };
 
   useEffect(() => {

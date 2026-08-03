@@ -66,6 +66,23 @@ async function markMessageAsRead(req, res, next) {
   }
 }
 
+// Mark a message as unread.
+async function markMessageAsUnread(req, res, next) {
+  try {
+    const message = await messageService.markMessageAsUnread(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      message: "Message marked as unread",
+      data: {
+        message,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 // Delete a message by ID.
 async function deleteMessage(req, res, next) {
   try {
@@ -82,5 +99,6 @@ module.exports = {
   getMessage,
   createMessage,
   markMessageAsRead,
+  markMessageAsUnread,
   deleteMessage,
 };

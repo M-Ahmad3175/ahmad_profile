@@ -4,91 +4,163 @@ import { SiLeetcode, SiTopcoder } from "react-icons/si";
 
 function Hero({ profile, resume, socialLinks, loading }) {
   const resumeLink = profile?.resume || resume?.resumeUrl || "#resume";
-  const socialItems = [
-    {
-      key: "github",
-      label: "GitHub",
-      href: socialLinks?.github,
-      Icon: FaGithub,
-    },
-    {
-      key: "linkedin",
-      label: "LinkedIn",
-      href: socialLinks?.linkedin,
-      Icon: FaLinkedinIn,
-    },
-    {
-      key: "leetcode",
-      label: "LeetCode",
-      href: socialLinks?.leetcode,
-      Icon: SiLeetcode,
-    },
-    {
-      key: "topcoder",
-      label: "TopCoder",
-      href: socialLinks?.topcoder,
-      Icon: SiTopcoder,
-    },
-    {
-      key: "x",
-      label: "X",
-      href: socialLinks?.x,
-      Icon: FaXTwitter,
-    },
-    {
-      key: "whatsapp",
-      label: "WhatsApp",
-      href: socialLinks?.whatsapp,
-      Icon: FaWhatsapp,
-    },
-    {
-      key: "email",
-      label: "Email",
-      href: socialLinks?.email,
-      Icon: FaEnvelope,
-      isEmail: true,
-    },
-    {
-      key: "portfolio",
-      label: "Portfolio",
-      href: socialLinks?.portfolio,
-      Icon: FaGlobe,
-    },
-  ]
-    .map((item) => {
-      const rawValue = typeof item.href === "string" ? item.href.trim() : "";
 
-      if (!rawValue) {
-        return null;
-      }
+  const buildSocialItems = (links) => {
+    if (Array.isArray(links)) {
+      return links
+        .filter((item) => item && typeof item === "object" && item.url)
+        .map((item, index) => {
+          const platform = (item.platform || item.name || `Link ${index + 1}`).toString().trim();
+          const rawValue = item.url.toString().trim();
+          const normalizedPlatform = platform.toLowerCase();
+          const iconConfig = {
+            github: { label: "GitHub", Icon: FaGithub },
+            linkedin: { label: "LinkedIn", Icon: FaLinkedinIn },
+            leetcode: { label: "LeetCode", Icon: SiLeetcode },
+            topcoder: { label: "TopCoder", Icon: SiTopcoder },
+            x: { label: "X", Icon: FaXTwitter },
+            twitter: { label: "X", Icon: FaXTwitter },
+            whatsapp: { label: "WhatsApp", Icon: FaWhatsapp },
+            email: { label: "Email", Icon: FaEnvelope, isEmail: true },
+            portfolio: { label: "Portfolio", Icon: FaGlobe },
+          };
+          const config = iconConfig[normalizedPlatform] || { label: platform, Icon: FaGlobe };
 
-      if (item.isEmail) {
-        return {
-          ...item,
-          href: rawValue.toLowerCase().startsWith("mailto:") ? rawValue : `mailto:${rawValue}`,
-        };
-      }
+          if (config.isEmail) {
+            return {
+              key: `${platform}-${index}`,
+              label: config.label,
+              href: rawValue.toLowerCase().startsWith("mailto:") ? rawValue : `mailto:${rawValue}`,
+              Icon: config.Icon,
+            };
+          }
 
-      if (
-        rawValue.toLowerCase().startsWith("http://") ||
-        rawValue.toLowerCase().startsWith("https://") ||
-        rawValue.toLowerCase().startsWith("tel:") ||
-        rawValue.toLowerCase().startsWith("mailto:")
-      ) {
-        return { ...item, href: rawValue };
-      }
+          if (
+            rawValue.toLowerCase().startsWith("http://") ||
+            rawValue.toLowerCase().startsWith("https://") ||
+            rawValue.toLowerCase().startsWith("tel:") ||
+            rawValue.toLowerCase().startsWith("mailto:")
+          ) {
+            return {
+              key: `${platform}-${index}`,
+              label: config.label,
+              href: rawValue,
+              Icon: config.Icon,
+            };
+          }
 
-      if (item.key === "whatsapp") {
-        const phoneNumber = rawValue.replace(/\D/g, "");
+          if (normalizedPlatform === "whatsapp") {
+            const phoneNumber = rawValue.replace(/\D/g, "");
 
-        if (phoneNumber) {
-          return { ...item, href: `https://wa.me/${phoneNumber}` };
+            if (phoneNumber) {
+              return {
+                key: `${platform}-${index}`,
+                label: config.label,
+                href: `https://wa.me/${phoneNumber}`,
+                Icon: config.Icon,
+              };
+            }
+          }
+
+          return {
+            key: `${platform}-${index}`,
+            label: config.label,
+            href: `https://${rawValue}`,
+            Icon: config.Icon,
+          };
+        });
+    }
+
+    const legacyLinks = [
+      {
+        key: "github",
+        label: "GitHub",
+        href: links?.github,
+        Icon: FaGithub,
+      },
+      {
+        key: "linkedin",
+        label: "LinkedIn",
+        href: links?.linkedin,
+        Icon: FaLinkedinIn,
+      },
+      {
+        key: "leetcode",
+        label: "LeetCode",
+        href: links?.leetcode,
+        Icon: SiLeetcode,
+      },
+      {
+        key: "topcoder",
+        label: "TopCoder",
+        href: links?.topcoder,
+        Icon: SiTopcoder,
+      },
+      {
+        key: "x",
+        label: "X",
+        href: links?.x,
+        Icon: FaXTwitter,
+      },
+      {
+        key: "whatsapp",
+        label: "WhatsApp",
+        href: links?.whatsapp,
+        Icon: FaWhatsapp,
+      },
+      {
+        key: "email",
+        label: "Email",
+        href: links?.email,
+        Icon: FaEnvelope,
+        isEmail: true,
+      },
+      {
+        key: "portfolio",
+        label: "Portfolio",
+        href: links?.portfolio,
+        Icon: FaGlobe,
+      },
+    ]
+      .map((item) => {
+        const rawValue = typeof item.href === "string" ? item.href.trim() : "";
+
+        if (!rawValue) {
+          return null;
         }
-      }
 
-      return { ...item, href: `https://${rawValue}` };
-    })
-    .filter(Boolean);
+        if (item.isEmail) {
+          return {
+            ...item,
+            href: rawValue.toLowerCase().startsWith("mailto:") ? rawValue : `mailto:${rawValue}`,
+          };
+        }
+
+        if (
+          rawValue.toLowerCase().startsWith("http://") ||
+          rawValue.toLowerCase().startsWith("https://") ||
+          rawValue.toLowerCase().startsWith("tel:") ||
+          rawValue.toLowerCase().startsWith("mailto:")
+        ) {
+          return { ...item, href: rawValue };
+        }
+
+        if (item.key === "whatsapp") {
+          const phoneNumber = rawValue.replace(/\D/g, "");
+
+          if (phoneNumber) {
+            return { ...item, href: `https://wa.me/${phoneNumber}` };
+          }
+        }
+
+        return { ...item, href: `https://${rawValue}` };
+      })
+      .filter(Boolean);
+
+    return legacyLinks;
+  };
+
+  const socialItems = buildSocialItems(socialLinks);
 
   return (
     <section
@@ -164,8 +236,18 @@ function Hero({ profile, resume, socialLinks, loading }) {
           transition={{ duration: 0.7 }}
           className="flex justify-center"
         >
-          <div className="flex h-64 w-64 items-center justify-center rounded-full bg-blue-600 text-7xl shadow-2xl shadow-blue-600/20 sm:h-72 sm:w-72 sm:text-8xl lg:h-80 lg:w-80">
-            {loading ? "..." : "👨‍💻"}
+          <div className="flex h-64 w-64 items-center justify-center overflow-hidden rounded-full bg-blue-600 text-7xl shadow-2xl shadow-blue-600/20 sm:h-72 sm:w-72 sm:text-8xl lg:h-80 lg:w-80">
+            {loading ? (
+              "..."
+            ) : profile?.profileImage ? (
+              <img
+                src={profile.profileImage}
+                alt={profile.fullName || "Profile"}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              "👨‍💻"
+            )}
           </div>
         </motion.div>
 

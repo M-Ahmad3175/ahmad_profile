@@ -5,6 +5,10 @@ const messageService = {
 
   create: async (data) => (await api.post("/messages", data)).data,
 
+  markRead: async (id) => (await api.patch(`/messages/${id}/read`)).data,
+
+  markUnread: async (id) => (await api.patch(`/messages/${id}/unread`)).data,
+
   delete: async (id) =>
     (await api.delete(`/messages/${id}`)).data,
 };

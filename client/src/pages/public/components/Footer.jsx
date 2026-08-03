@@ -2,91 +2,76 @@ import { FaEnvelope, FaGithub, FaGlobe, FaLinkedinIn, FaWhatsapp, FaXTwitter } f
 import { SiLeetcode, SiTopcoder } from "react-icons/si";
 
 function Footer({ profile, settings, socialLinks }) {
-  const socialItems = [
-    {
-      key: "github",
-      label: "GitHub",
-      href: socialLinks?.github,
-      Icon: FaGithub,
-    },
-    {
-      key: "linkedin",
-      label: "LinkedIn",
-      href: socialLinks?.linkedin,
-      Icon: FaLinkedinIn,
-    },
-    {
-      key: "leetcode",
-      label: "LeetCode",
-      href: socialLinks?.leetcode,
-      Icon: SiLeetcode,
-    },
-    {
-      key: "topcoder",
-      label: "TopCoder",
-      href: socialLinks?.topcoder,
-      Icon: SiTopcoder,
-    },
-    {
-      key: "x",
-      label: "X",
-      href: socialLinks?.x,
-      Icon: FaXTwitter,
-    },
-    {
-      key: "whatsapp",
-      label: "WhatsApp",
-      href: socialLinks?.whatsapp,
-      Icon: FaWhatsapp,
-    },
-    {
-      key: "email",
-      label: "Email",
-      href: socialLinks?.email,
-      Icon: FaEnvelope,
-      isEmail: true,
-    },
-    {
-      key: "portfolio",
-      label: "Portfolio",
-      href: socialLinks?.portfolio,
-      Icon: FaGlobe,
-    },
-  ]
-    .map((item) => {
-      const rawValue = typeof item.href === "string" ? item.href.trim() : "";
+  const buildSocialItems = (links) => {
+    if (Array.isArray(links)) {
+      return links
+        .filter((item) => item && typeof item === "object" && item.url)
+        .map((item, index) => {
+          const platform = (item.platform || item.name || `Link ${index + 1}`).toString().trim();
+          const rawValue = item.url.toString().trim();
+          const normalizedPlatform = platform.toLowerCase();
+          const iconConfig = {
+            github: { label: "GitHub", Icon: FaGithub },
+            linkedin: { label: "LinkedIn", Icon: FaLinkedinIn },
+            leetcode: { label: "LeetCode", Icon: SiLeetcode },
+            topcoder: { label: "TopCoder", Icon: SiTopcoder },
+            x: { label: "X", Icon: FaXTwitter },
+            twitter: { label: "X", Icon: FaXTwitter },
+            whatsapp: { label: "WhatsApp", Icon: FaWhatsapp },
+            email: { label: "Email", Icon: FaEnvelope, isEmail: true },
+            portfolio: { label: "Portfolio", Icon: FaGlobe },
+          };
+          const config = iconConfig[normalizedPlatform] || { label: platform, Icon: FaGlobe };
 
-      if (!rawValue) {
-        return null;
-      }
+          if (config.isEmail) {
+            return {
+              key: `${platform}-${index}`,
+              label: config.label,
+              href: rawValue.toLowerCase().startsWith("mailto:") ? rawValue : `mailto:${rawValue}`,
+              Icon: config.Icon,
+            };
+          }
 
-      if (item.isEmail) {
-        return {
-          ...item,
-          href: rawValue.toLowerCase().startsWith("mailto:") ? rawValue : `mailto:${rawValue}`,
-        };
-      }
+          if (
+            rawValue.toLowerCase().startsWith("http://") ||
+            rawValue.toLowerCase().startsWith("https://") ||
+            rawValue.toLowerCase().startsWith("tel:") ||
+            rawValue.toLowerCase().startsWith("mailto:")
+          ) {
+            return {
+              key: `${platform}-${index}`,
+              label: config.label,
+              href: rawValue,
+              Icon: config.Icon,
+            };
+          }
 
-      if (
-        rawValue.toLowerCase().startsWith("http://") ||
-        rawValue.toLowerCase().startsWith("https://") ||
-        rawValue.toLowerCase().startsWith("tel:") ||
-        rawValue.toLowerCase().startsWith("mailto:")
-      ) {
-        return { ...item, href: rawValue };
-      }
+          if (normalizedPlatform === "whatsapp") {
+            const phoneNumber = rawValue.replace(/\D/g, "");
 
-      if (item.key === "whatsapp") {
-        const phoneNumber = rawValue.replace(/\D/g, "");
+            if (phoneNumber) {
+              return {
+                key: `${platform}-${index}`,
+                label: config.label,
+                href: `https://wa.me/${phoneNumber}`,
+                Icon: config.Icon,
+              };
+            }
+          }
 
-        if (phoneNumber) {
-          return { ...item, href: `https://wa.me/${phoneNumber}` };
-        }
-      }
+          return {
+            key: `${platform}-${index}`,
+            label: config.label,
+            href: `https://${rawValue}`,
+            Icon: config.Icon,
+          };
+        });
+    }
 
-      return { ...item, href: `https://${rawValue}` };
-    })
-    .filter(Boolean);
+    return [];
+  };
+
+  const socialItems = buildSocialItems(socialLinks);
 
   return (
     <footer className="border-t border-white/10 bg-gray-950 py-12 text-white sm:py-14">

@@ -20,6 +20,7 @@ router.post(
 router.get("/messages", authMiddleware, messageController.getMessages);
 router.get("/messages/:id", authMiddleware, messageController.getMessage);
 router.patch("/messages/:id/read", authMiddleware, messageController.markMessageAsRead);
+router.patch("/messages/:id/unread", authMiddleware, messageController.markMessageAsUnread);
 router.delete("/messages/:id", authMiddleware, messageController.deleteMessage);
 
 module.exports = router;
